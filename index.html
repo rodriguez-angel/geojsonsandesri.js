@@ -6,10 +6,13 @@
 
     <style>
       html,
-      body,
-      arcgis-map {
+      body {
         padding: 0;
         margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+      #viewDiv {
         height: 100%;
         width: 100%;
       }
@@ -21,38 +24,83 @@
       };
     </script>
 
+    <!-- Load the ArcGIS Maps SDK for JavaScript from CDN -->
+    <link rel="stylesheet" href="https://js.arcgis.com/4.31/esri/themes/light/main.css" />
+    <script src="https://js.arcgis.com/4.31/"></script>
+  </head>
+
+  <body>
+    <div id="viewDiv"></div>
+
     <script>
+      require(["esri/Map", "esri/layers/GeoJSONLayer", "esri/views/MapView"], (
+      Map,
+      GeoJSONLayer,
+      MapView
+    ) => {
+      // If GeoJSON files are not on the same domain as your website, a CORS enabled server
+      // or a proxy is required.
+      const url = "./Angelmap.geojson";
+
+      const template = {
+        title: "Earthquake Info",
+        content: "Magnitude {mag} {type} hit {place} on {time}",
+        fieldInfos: [
+          {
+            fieldName: 'time',
+            format: {
+              dateFormat: 'short-date-short-time'
+            }
+          }
+        ]
+      };
+
+      const renderer = {
+        type: "simple",
+        field: "mag",
+        symbol: {
+          type: "simple-marker",
+          color: "orange",
+          outline: {
+            color: "white"
+          }
+        },
+        visualVariables: [{
+          type: "size",
+          field: "mag",
+          stops: [{
+              value: 2.5,
+              size: "4px"
+            },
+            {
+              value: 8,
+              size: "40px"
+            }
+          ]
+        }]
+      };
+
       const geojsonLayer = new GeoJSONLayer({
         url: url,
-        copyright: "USGS Earthquakes",
-        popupTemplate: template
+        popupTemplate: template,
+        renderer: renderer,
+        orderBy: {
+          field: "mag"
+        }
       });
+
+      const map = new Map({
+        basemap: "gray-vector",
+        layers: [geojsonLayer]
+      });
+
+      const view = new MapView({
+        container: "viewDiv",
+        center: [-168, 46],
+        zoom: 2,
+        map: map
+      });
+    });
     </script>
-
-    <!-- Load Calcite components from CDN -->
-    <link rel="stylesheet" type="text/css" href="https://js.arcgis.com/calcite-components/2.13.2/calcite.css" />
-    <script type="module" src="https://js.arcgis.com/calcite-components/2.13.2/calcite.esm.js"></script>
-
-        <!-- Load the ArcGIS Maps SDK for JavaScript from CDN -->
-        <link rel="stylesheet" href="https://js.arcgis.com/4.31/esri/themes/light/main.css" />
-        <script src="https://js.arcgis.com/4.31/"></script>
-    
-        <!-- Load Map components from CDN-->
-        <script
-          type="module"
-          src="https://js.arcgis.com/map-components/4.31/arcgis-map-components.esm.js"
-        ></script>
-    
-      </head>
-    
-      <body>
-    
-        <arcgis-map basemap="arcgis/topographic" center="-118.805, 34.027" zoom="13">
-    
-          <arcgis-zoom position="top-left"></arcgis-zoom>
-    
-        </arcgis-map>
-    
-      </body>
-    
-    </html>
+  </body>
+</html>
