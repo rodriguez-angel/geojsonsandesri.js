@@ -18,125 +18,61 @@
       }
     </style>
 
-    <script>
-          require([  
-      "esri/config",  
-      "esri/Map",  
-      "esri/views/MapView",   
-      "esri/Graphic",  
-      "esri/layers/GraphicsLayer"   
-    ], function(esriConfig,Map, MapView, Graphic, GraphicsLayer) {
-    
-      var esriConfig = {
-        apiKey: "AAPTxy8BH1VEsoebNVZXo8HurMDO2Lvg3fqfK_WEnH5iFTMBraaeXiSHJGRbnr1Zs4Isr4QgtEWFLCgjEyJUqKPiF1twAE7x6mEbufhgGS8kDfdHZrm-MxCYabUC4R4l1qsZ41mzL6Or0hSE4dkXf_yST7bEx29lJkvmLZa5L6lxxauEogtg-aafqVSunqkSD9MFqBnsg6KGrMADv7SZEjDdrTjOkdGIkev0d6XLanocxs2I9M7C0otsi3fKjt2gtQYJAT1_mPb6eiGn"
-      };
-      });
-    
-      const graphicsLayer = new GraphicsLayer();  
-      map.add(graphicsLayer);
-
-      const point = {
-        type: "point",
-        longitude: -118.806574,
-        latitude: 34.000,
-      };
-      
-      const simpleMarkerSymbol = {
-        type: "simple-marker",
-        color: [0, 0, 139], 
-        outline: {
-          color: [255, 255, 255], 
-          width: 1
-        }
-      };
-
-      const pointGraphic = new Graphic({
-        geometry: point,
-        symbol: simpleMarkerSymbol
-      });
-
-      graphicsLayer.add(pointGraphic);
-
-    </script>
-
     <!-- Load the ArcGIS Maps SDK for JavaScript from CDN -->
     <link rel="stylesheet" href="https://js.arcgis.com/4.31/esri/themes/light/main.css" />
     <script src="https://js.arcgis.com/4.31/"></script>
-  
+
+    <script>
+      require([
+        "esri/config",
+        "esri/Map",
+        "esri/views/MapView",
+        "esri/Graphic",
+        "esri/layers/GraphicsLayer"
+      ], function(esriConfig, Map, MapView, Graphic, GraphicsLayer) {
+        
+        esriConfig.apiKey = "AAPTxy8BH1VEsoebNVZXo8HurMDO2Lvg3fqfK_WEnH5iFTMBraaeXiSHJGRbnr1Zs4Isr4QgtEWFLCgjEyJUqKPiF1twAE7x6mEbufhgGS8kDfdHZrm-MxCYabUC4R4l1qsZ41mzL6Or0hSE4dkXf_yST7bEx29lJkvmLZa5L6lxxauEogtg-aafqVSunqkSD9MFqBnsg6KGrMADv7SZEjDdrTjOkdGIkev0d6XLanocxs2I9M7C0otsi3fKjt2gtQYJAT1_mPb6eiGn";
+
+        const map = new Map({
+          basemap: "gray-vector"
+        });
+
+        const view = new MapView({
+          container: "viewDiv",
+          map: map,
+          center: [-118.806574, 34.000],
+          zoom: 10
+        });
+
+        const graphicsLayer = new GraphicsLayer();
+        map.add(graphicsLayer);
+
+        const point = {
+          type: "point",
+          longitude: -118.806574,
+          latitude: 34.000,
+        };
+
+        const simpleMarkerSymbol = {
+          type: "simple-marker",
+          color: [0, 0, 139],
+          outline: {
+            color: [255, 255, 255],
+            width: 1
+          }
+        };
+
+        const pointGraphic = new Graphic({
+          geometry: point,
+          symbol: simpleMarkerSymbol
+        });
+
+        graphicsLayer.add(pointGraphic);
+      });
+    </script>
   </head>
 
   <body>
     <div id="viewDiv"></div>
-
-    <script>
-      require(["esri/Map", "esri/layers/GeoJSONLayer", "esri/views/MapView"], (
-      Map,
-      GeoJSONLayer,
-      MapView
-    ) => {
-      // If GeoJSON files are not on the same domain as your website, a CORS enabled server
-      // or a proxy is required.
-      const url = "./Angelmap.geojson";
-
-      const template = {
-        title: "{City}",
-        content: "",
-        fieldInfos: [
-          {
-            fieldName: 'time',
-            format: {
-              dateFormat: 'short-date-short-time'
-            }
-          }
-        ]
-      };
-
-      const renderer = {
-        type: "simple",
-        field: "mag",
-        symbol: {
-          type: "simple-marker",
-          color: "orange",
-          outline: {
-            color: "white"
-          }
-        },
-        visualVariables: [{
-          type: "size",
-          field: "mag",
-          stops: [{
-              value: 2.5,
-              size: "4px"
-            },
-            {
-              value: 8,
-              size: "40px"
-            }
-          ]
-        }]
-      };
-
-      const geojsonLayer = new GeoJSONLayer({
-        url: url,
-        popupTemplate: template,
-        renderer: renderer,
-        orderBy: {
-          field: "mag"
-        }
-      });
-
-      const map = new Map({
-        basemap: "gray-vector",
-        layers: [geojsonLayer]
-      });
-
-      const view = new MapView({
-        container: "viewDiv",
-        center: [-168, 46],
-        zoom: 2,
-        map: map
-      });
-    });
-    </script>
   </body>
 </html>
