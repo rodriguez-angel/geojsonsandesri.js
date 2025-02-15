@@ -165,9 +165,7 @@
 
         //adding the feature layer to the map
         map.add(usaeduLayer);
-        // End of Feature Layer (Part 4)
 
-        // Start of Feature Layer (Part 6)
         const airportRenderer = {
           "type": "simple",
           "symbol": {
@@ -201,21 +199,37 @@
           definitionExpression: "Fac_Type IN ('HELIPORT')" //adding sql to filter for heliports
         });
 
-        //adding the feature layer to the map
         map.add(airportLayer);
         map.add(heliportLayer);
-        
-        // Start of Feature Layer (Part 5)
+
         const popupAirports = {
           "title": "Airports",
           "content": "<b>City: </b>{City}<br> <b>FID:</b> {FID}<br>"
         }
         
-        //const to make the airport labels
         const airportLabels = {
           symbol: {
             type: "text",
             color: "#FFFFFF",
+            haloColor: "#5E8D74",
+            haloSize: "2px",
+            font: {
+              size: "12px",
+              family: "Noto Sans",
+              style: "italic",
+              weight: "normal"
+            }
+          },
+          labelPlacement: "above-center",
+          labelExpressionInfo: {
+            expression: "$feature.Fac_Name"
+          }
+        };
+
+        const heliportLabels = {
+          symbol: {
+            type: "text",
+            color: "#0000FF",
             haloColor: "#5E8D74",
             haloSize: "2px",
             font: {
@@ -237,9 +251,18 @@
           renderer: airportRenderer, //calling the icon
           definitionExpression: "Fac_Type = 'AIRPORT'", //adding sql to filter for airports
           labelingInfo: [airportLabels], //adding the labels
-          popupTemplate: popupAirports
+      
         });
     
+        const heliportsLayer = new FeatureLayer({
+          url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/MyAirportsNamesAreTaken/FeatureServer",
+          outFields: ["City", "FID"],
+          renderer: heliportRenderer, //calling the icon
+          definitionExpression: "Fac_Type = 'HELIPORT'", //adding sql to filter for airports
+          labelingInfo: [heliportLabels], //adding the labels
+          popupTemplate: popupAirports
+        });
+
         map.add(usairportsLayer);
         // End of Feature Layer (Part 5)
 
