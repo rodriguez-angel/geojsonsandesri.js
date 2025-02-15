@@ -28,8 +28,9 @@
         "esri/Map",
         "esri/views/MapView",
         "esri/Graphic",
-        "esri/layers/GraphicsLayer"
-      ], function(esriConfig, Map, MapView, Graphic, GraphicsLayer) {
+        "esri/layers/GraphicsLayer",
+        "esri/geometry/Polyline"
+      ], function(esriConfig, Map, MapView, Graphic, GraphicsLayer, Polyline) {
         
         esriConfig.apiKey = "AAPTxy8BH1VEsoebNVZXo8HurMDO2Lvg3fqfK_WEnH5iFTMBraaeXiSHJGRbnr1Zs4Isr4QgtEWFLCgjEyJUqKPiF1twAE7x6mEbufhgGS8kDfdHZrm-MxCYabUC4R4l1qsZ41mzL6Or0hSE4dkXf_yST7bEx29lJkvmLZa5L6lxxauEogtg-aafqVSunqkSD9MFqBnsg6KGrMADv7SZEjDdrTjOkdGIkev0d6XLanocxs2I9M7C0otsi3fKjt2gtQYJAT1_mPb6eiGn";
 
@@ -86,13 +87,12 @@
 
         // Start of polylines
         let paths = [
-            [  // square path
+          [  // square path
             [-97.751689, 30.264098],
             [-97.749689, 30.264098],
             [-97.749689, 30.262098],
             [-97.751689, 30.262098],
             [-97.751689, 30.264098]
-            ]
           ]
         ];
 
@@ -102,6 +102,19 @@
           paths: paths,
           spatialReference: { wkid: 4326 }
         });
+
+        const lineSymbol = {
+          type: "simple-line",
+          color: [226, 119, 40],
+          width: 2
+        };
+
+        const polylineGraphic = new Graphic({
+          geometry: line,
+          symbol: lineSymbol
+        });
+
+        graphicsLayer.add(polylineGraphic);
         // End of polylines
       });
     </script>
