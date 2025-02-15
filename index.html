@@ -85,13 +85,23 @@
         // End of Point Graphic
 
         // Start of polylines
-        const polyline = {
-          type: "polyline",
-          paths: [
-            [-97.750689, 30.263098],
-            [-97.735, 30.261]
+        let paths = [
+            [  // square path
+            [-97.751689, 30.264098],
+            [-97.749689, 30.264098],
+            [-97.749689, 30.262098],
+            [-97.751689, 30.262098],
+            [-97.751689, 30.264098]
+            ]
           ]
-        };
+        ];
+
+        let line = new Polyline({
+          hasZ: false,
+          hasM: true,
+          paths: paths,
+          spatialReference: { wkid: 4326 }
+        });
         // End of polylines
       });
     </script>
