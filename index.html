@@ -181,6 +181,23 @@
         });
     
         map.add(usairportsLayer);
+        //End of Feature Layer (Part 5)
+
+        //Start of Feature Layer (Part 6)
+        const airportRenderer = {
+          "type": "simple",
+          "symbol": {
+            "type": "picture-marker",
+            "url": "local_airport_24dp_E8EAED.png",
+            "width": "18px",
+            "height": "18px"
+          }
+        }
+
+        const airportLayer = new FeatureLayer({
+          url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/US_Airports/FeatureServer",
+          renderer: airportRenderer
+        });
       });
     </script>
   </head>
