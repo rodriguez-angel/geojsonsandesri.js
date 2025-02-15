@@ -154,12 +154,12 @@
         // Start of Feature Layer
         const popupEduusa = {
           "title": "EDUs",
-          "content": "<b>Name:</b> {INSTNM}<br><b>Street address or post office box:</b> {ADDR}<br>"
+          "content": "<b>Name:</b> {INSTNM}<br><b>Street address or post office box:</b> {ADDR}<br> <b>Website:<b> {WEBADDR}<br>"
         }
         
         const usaeduLayer = new FeatureLayer({
           url: "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Colleges_and_Universities_View/FeatureServer",
-          outFields: ["INSTNM","ADDR"],
+          outFields: ["INSTNM","ADDR","WEBADDR"],
           popupTemplate: popupEduusa
         });
 
