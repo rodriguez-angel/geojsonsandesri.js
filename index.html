@@ -152,10 +152,17 @@
         // End of Polygons
 
         // Start of Feature Layer
+        const popupEduusa = {
+          "title": "EDUs",
+          "content": "<b>Name:</b> {INSTNM}<br><b>Street address or post office box:</b> {ADDR}<br>"
+        }
+        
         const usaeduLayer = new FeatureLayer({
           url: "https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Colleges_and_Universities_View/FeatureServer"
         });
         map.add(usaeduLayer);
+
+        
       });
     </script>
   </head>
