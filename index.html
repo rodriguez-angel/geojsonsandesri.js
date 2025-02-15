@@ -136,7 +136,7 @@
 
         const polygonSymbol = {
           type: "simple-fill",
-            color: [53, 94, 59, 0.6], // Hunter green color
+          color: [53, 94, 59, 0.6], // Hunter green color
           outline: {
             color: [255, 255, 255],
             width: 1
@@ -154,7 +154,7 @@
         // Start of Feature Layer (Part 4)
         const popupEduusa = {
           "title": "EDUs",
-            "content": "<b>Name:</b> {INSTNM}<br><b>Street address or post office box:</b> {ADDR}<br><b>Website:</b> <a href='{WEBADDR}' target='_blank'>{WEBADDR}</a><br>"
+          "content": "<b>Name:</b> {INSTNM}<br><b>Street address or post office box:</b> {ADDR}<br><b>Website:</b> <a href='{WEBADDR}' target='_blank'>{WEBADDR}</a><br>"
         }
         
         const usaeduLayer = new FeatureLayer({
@@ -189,7 +189,7 @@
         // Start of Feature Layer (Part 5)
         const popupAirports = {
           "title": "Airports",
-            "content": "<b>City: </b>{City}<br> <b>FID:</b> {FID}<br>"
+          "content": "<b>City: </b>{City}<br> <b>FID:</b> {FID}<br>"
         }
         
         const usairportsLayer = new FeatureLayer({
