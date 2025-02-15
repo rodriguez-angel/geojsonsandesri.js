@@ -173,19 +173,18 @@
             "url": "https://sounny.github.io/agol/outline_local_airport_black_24dp.png",
             "width": "18px",
             "height": "18px"
-        }
+          }
         };
         
         const heliportRenderer = {
-        "type": "simple",
+          "type": "simple",
           "symbol": {
             "type": "picture-marker",
             "url": "635717.png",
             "width": "18px",
             "height": "18px"
           }
-        
-        }
+        };
 
         const airportLayer = new FeatureLayer({
           url: "https://services.arcgis.com/HRPe58bUyBqyyiCt/arcgis/rest/services/US_Airports/FeatureServer",
@@ -205,7 +204,7 @@
         const popupAirports = {
           "title": "Airports",
           "content": "<b>City: </b>{City}<br> <b>FID:</b> {FID}<br>"
-        }
+        };
         
         const airportLabels = {
           symbol: {
@@ -251,19 +250,19 @@
           renderer: airportRenderer, //calling the icon
           definitionExpression: "Fac_Type = 'AIRPORT'", //adding sql to filter for airports
           labelingInfo: [airportLabels], //adding the labels
-      
         });
     
         const heliportsLayer = new FeatureLayer({
           url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/MyAirportsNamesAreTaken/FeatureServer",
           outFields: ["City", "FID"],
           renderer: heliportRenderer, //calling the icon
-          definitionExpression: "Fac_Type = 'HELIPORT'", //adding sql to filter for airports
+          definitionExpression: "Fac_Type = 'HELIPORT'", //adding sql to filter for heliports
           labelingInfo: [heliportLabels], //adding the labels
           popupTemplate: popupAirports
         });
 
         map.add(usairportsLayer);
+        map.add(heliportsLayer);
         // End of Feature Layer (Part 5)
 
       });
