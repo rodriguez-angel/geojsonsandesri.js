@@ -11,7 +11,7 @@
         margin: 0;
         height: 100%;
         width: 100%;
-       };
+      }
       #viewDiv {
         height: 100%;
         width: 100%;
@@ -47,10 +47,11 @@
         const graphicsLayer = new GraphicsLayer();
         map.add(graphicsLayer);
 
+        // Start of Point Graphic
         const point = {
           type: "point",
           longitude: -97.750689,
-          latitude: 30.263098,
+          latitude: 30.263098
         };
 
         const simpleMarkerSymbol = {
@@ -64,23 +65,34 @@
         };
 
         const popupTemplate = {
-            title: "{Name}",
-            content: "{Description}"
-        }
+          title: "{Name}",
+          content: "{Description}"
+        };
+
         const attributes = {
-            Name: "Stevie Ray Vaughan Statue",
-            Description: "A bronze sculpture of Stevie Ray Vaughan by Ralph Helmick"
-        }
-        
+          Name: "Stevie Ray Vaughan Statue",
+          Description: "A bronze sculpture of Stevie Ray Vaughan by Ralph Helmick"
+        };
+
         const pointGraphic = new Graphic({
           geometry: point,
           symbol: simpleMarkerSymbol,
-        
           attributes: attributes,
           popupTemplate: popupTemplate
         });
 
         graphicsLayer.add(pointGraphic);
+        // End of Point Graphic
+
+        // Start of polylines
+        const polyline = {
+          type: "polyline",
+          paths: [
+            [-97.750689, 30.263098],
+            [-97.735, 30.261]
+          ]
+        };
+        // End of polylines
       });
     </script>
   </head>
