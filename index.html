@@ -176,7 +176,8 @@
         
         const usairportsLayer = new FeatureLayer({
           url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/MyAirportsNamesAreTaken/FeatureServer",
-          outFields: ["Fac_Name"]
+          outFields: ["Fac_Name"],
+          popupTemplate: popupAirports
         });
     
         map.add(usairportsLayer);
