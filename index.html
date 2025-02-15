@@ -171,12 +171,12 @@
         //Start of Feature Layer (Part 5)
         const popupAirports = {
           "title": "Airports",
-            "content": "<b>Name:</b> {Fac_Name}<br>"
+            "content": "<b>Name:</b> {FID}<br>"
         }
         
         const usairportsLayer = new FeatureLayer({
           url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/MyAirportsNamesAreTaken/FeatureServer",
-          outFields: ["Fac_Name"],
+          outFields: ["FID"],
           popupTemplate: popupAirports
         });
     
