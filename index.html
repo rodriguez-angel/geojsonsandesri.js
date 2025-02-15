@@ -151,7 +151,7 @@
         graphicsLayer.add(polygonGraphic);
         // End of Polygons
 
-        // Start of Feature Layer
+        // Start of Feature Layer (Part 4)
         const popupEduusa = {
           "title": "EDUs",
             "content": "<b>Name:</b> {INSTNM}<br><b>Street address or post office box:</b> {ADDR}<br><b>Website:</b> <a href='{WEBADDR}' target='_blank'>{WEBADDR}</a><br>"
@@ -166,9 +166,22 @@
         //adding the feature layer to the map
         map.add(usaeduLayer);
 
-        // End of Feature Layer
-      });
-    </script>
+        // End of Feature Layer (Part 4)
+
+        //Start of Feature Layer (Part 5)
+        const popupAirports = {
+          "title": "Airports",
+            "content": "<b>Name:</b> {Fac_Name}<br>"
+        }
+        
+        const usairportsLayer = new FeatureLayer({
+          url: "https://services.arcgis.com/LBbVDC0hKPAnLRpO/arcgis/rest/services/MyAirportsNamesAreTaken/FeatureServer",
+          outFields: ["Fac_Name"]
+        });
+    
+        map.add(usairportsLayer);
+
+        </script>
   </head>
 
   <body>
