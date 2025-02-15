@@ -118,7 +118,36 @@
         // End of polylines
       
         // Start of Polygons
+        const polygonRings = [
+          [-97.750689, 30.263598], // Top
+          [-97.751189, 30.263298], // Top-left
+          [-97.751189, 30.262898], // Bottom-left
+          [-97.750189, 30.262898], // Bottom-right
+          [-97.750189, 30.263298], // Top-right
+          [-97.750689, 30.263598]  // Close the polygon
+        ];
 
+        const polygon = new Polygon({
+          rings: [polygonRings],
+          spatialReference: { wkid: 4326 }
+        });
+
+        const polygonSymbol = {
+          type: "simple-fill",
+          color: [53, 94, 59, 0.9], // Hunter green color
+          outline: {
+            color: [255, 255, 255],
+            width: 1
+          }
+        };
+
+        const polygonGraphic = new Graphic({
+          geometry: polygon,
+          symbol: polygonSymbol
+        });
+
+        graphicsLayer.add(polygonGraphic);
+        // End of Polygons
         
 
 
