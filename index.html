@@ -202,8 +202,13 @@
         map.add(heliportLayer);
 
         const popupAirports = {
-          "title": "Airports",
-          "content": "<b>City: </b>{City}<br> <b>FID:</b> {FID}<br>"
+          title: "Airports",
+          content: "<b>Facility Name: </b>{Fac_Name}<br> <b>City: </b>{City}<br> <b>FID:</b> {FID}<br>"
+        };
+
+        const popupHeliports = {
+          title: "Heliports",
+          content: "<b>Facility Name: </b>{Fac_Name}<br> <b>City: </b>{City}<br> <b>FID:</b> {FID}<br>"
         };
         
         const airportLabels = {
@@ -250,6 +255,7 @@
           renderer: airportRenderer, //calling the icon
           definitionExpression: "Fac_Type = 'AIRPORT'", //adding sql to filter for airports
           labelingInfo: [airportLabels], //adding the labels
+          popupTemplate: popupAirports
         });
     
         const heliportsLayer = new FeatureLayer({
@@ -258,7 +264,7 @@
           renderer: heliportRenderer, //calling the icon
           definitionExpression: "Fac_Type = 'HELIPORT'", //adding sql to filter for heliports
           labelingInfo: [heliportLabels], //adding the labels
-          popupTemplate: popupAirports
+          popupTemplate: popupHeliports
         });
 
         map.add(usairportsLayer);
